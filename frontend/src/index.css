@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+
+body{
+    background-color: black;
+    color: white;
+}
+h1{
+    font-weight: bold;
+    font-size: 1.5em;
+    
+    
+}
+hr{
+    color: #99a1af ;
+}
+.react-multi-carousel-track {
+    transition: transform 0.4s ease-in-out !important;
+  }
