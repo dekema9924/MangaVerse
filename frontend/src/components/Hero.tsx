@@ -1,65 +1,63 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import CarouselComponent from "./CarauselComponent"
 import "react-multi-carousel/lib/styles.css";
 import Featured from "./Featured";
 import { responsive } from "./CarauselComponent";
-
+import axios from 'axios'
+import { ApiUrl } from "../config/ApiUrl";
 
 
 
 
 export interface mangaInterface {
-    img: string
+    coverUrl?: string
     title: string
     id: string
 }
 
-export const initialState: mangaInterface[] = [
-    {
-        img: 'https://mangadex.org/covers/d0ddd740-4b91-4c66-bfd0-b36a77f8e730/e2be562e-6f9a-4a1c-ab7e-31d593914232.png.256.jpg',
-        title: 'Brairot Girlfriend',
-        id: "abc"
-    },
-    {
-        img: 'https://mangadex.org/covers/7878c129-a33d-4bf9-b5d2-ff98cbe85bd6/e64f7500-6e1f-4740-b495-26ccc0e97e01.jpg.512.jpg',
-        title: 'Sentai Daishikkaku',
-        id: "abcd"
-    },
-    {
-        img: 'https://mangadex.org/covers/d422ddc8-eea3-4b0a-82a4-291bbd8c9285/56dd5e24-d619-453c-8500-495e0fb21a1a.jpg.256.jpg',
-        title: 'The Shiunji Famil children',
-        id: "abcde"
-    },
-    {
-        img: 'https://mangadex.org/covers/b8fd9d83-40c4-40f9-8525-bfcab3a6c3eb/53f80942-49ff-408b-b1c4-78029875c2a4.jpg.256.jpg',
-        title: 'Osananajimi wo Erabenai!',
-        id: "abcdef"
-    },
-    {
-        img: 'https://mangadex.org/covers/d0ddd740-4b91-4c66-bfd0-b36a77f8e730/e2be562e-6f9a-4a1c-ab7e-31d593914232.png.256.jpg',
-        title: 'Brairot Girlfriend',
-        id: "abc"
-    },
-    {
-        img: 'https://mangadex.org/covers/7878c129-a33d-4bf9-b5d2-ff98cbe85bd6/e64f7500-6e1f-4740-b495-26ccc0e97e01.jpg.512.jpg',
-        title: 'Sentai Daishikkaku',
-        id: "abcd"
-    },
-    {
-        img: 'https://mangadex.org/covers/d422ddc8-eea3-4b0a-82a4-291bbd8c9285/56dd5e24-d619-453c-8500-495e0fb21a1a.jpg.256.jpg',
-        title: 'The Shiunji Famil children',
-        id: "abcde"
-    },
-    {
-        img: 'https://mangadex.org/covers/b8fd9d83-40c4-40f9-8525-bfcab3a6c3eb/53f80942-49ff-408b-b1c4-78029875c2a4.jpg.256.jpg',
-        title: 'Osananajimi wo Erabenai!',
-        id: "abcdef"
-    },
-]
+export const initialState: mangaInterface[] = []
+
 
 const Hero = () => {
-    const [manga, setManga] = useState(initialState)
-    const [isLoading, setisLoading] = useState(false)
+    const [manga, setManga] = useState<mangaInterface[]>([])
+    const [isLoading, setisLoading] = useState(true)
+
+    useEffect(()=>{
+        axios.get(`${ApiUrl.baseUrl}?limit=20&order[followedCount]=desc&includes[]=cover_art&availableTranslatedLanguage[]=en`)
+        .then((response)=>{
+            console.log(response)
+
+
+            interface MangaResponse {
+                id: string;
+                attributes: {
+                    title: {
+                        en?: string;
+                        "en-US"?: string;
+                    };
+                };
+                relationships: {
+                    type: string;
+                    attributes: {
+                        fileName: string;
+                    };
+                }[];
+            }
+
+            const mangaData = response.data.data.map((manga: MangaResponse) => {
+                const title = manga.attributes.title.en || manga.attributes.title["en-US"];
+                const cover = manga.relationships.find((rel: { type: string }) => rel.type === 'cover_art');
+                const coverUrl = cover ? `https://uploads.mangadex.org/covers/${manga.id}/${cover.attributes.fileName}` : '';
+
+                return {title, coverUrl}
+            });
+
+            setManga(mangaData)
+            setisLoading(false)
+            
+
+        })
+    },[])
     return (
         <>
             <div className="mt-10 z-40 relative ">
@@ -72,7 +70,7 @@ const Hero = () => {
                                         return (
                                             <div className=" w-full  " key={data.id}>
                                                 <div>
-                                                    <img className="md:w-[256px] w-96 h-96 m-auto object-center  md:h-[366px] object-cover rounded-md" src={data.img} alt="mangaCover" />
+                                                    <img className="md:w-[256px] w-96 h-96 m-auto object-center  md:h-[366px] object-cover rounded-md" src={data.coverUrl} alt="mangaCover" />
                                                 </div>
                                                 <p className="text-2xl md:text-lg text-center font-bold pt-1">{data.title}</p>
 
