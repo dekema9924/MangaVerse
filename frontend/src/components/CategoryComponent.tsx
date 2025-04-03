@@ -89,9 +89,9 @@ function CategoryComponent({ children, category, url }: CategoryComponentProps) 
             {
                 !isLoading ?
                     <>
-                        <div className="mt-14">
+                        <div className="mt-14 relative z-10">
                             <h2 className="text-2xl font-bold">{category}</h2>
-                            <div>{children}</div> {/* Ensures children are rendered */}
+                            <div>{children}</div> 
                             <CarouselComponent responsive={responsive}>
                                 {
                                     manga.map((data) => {
