@@ -5,6 +5,7 @@ import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import { useParams } from 'react-router-dom'
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import useGetDetails from '../../hooks/useGetDetails';
+import Chapters from './Chapters';
 
 function Manga() {
     const { id } = useParams()
@@ -24,7 +25,7 @@ function Manga() {
                                     className="absolute inset-0 bg-black opacity-50"
                                     style={{
                                         backgroundImage:
-                                           `url(${coverUrl ? coverUrl : "https://placehold.co/600x400/000000/FFFFFF/pn"})`,
+                                            `url(${coverUrl ? coverUrl : "https://placehold.co/600x400/000000/FFFFFF/pn"})`,
                                         backgroundSize: "cover",
                                         backgroundPosition: "center",
                                     }}
@@ -40,7 +41,7 @@ function Manga() {
                                     <div className="mt-4 sm:mt-0 sm:ml-4 text-white relative w-full">
                                         <p className="text-xl font-bold md:text-[4em]">{mangaDetails?.attributes?.title['en']}</p>
                                         <p className="my-6">
-                                            {mangaDetails?.attributes?.altTitles.find((titleObj: {[key: string]: string}) => titleObj.hasOwnProperty('ko'))?.ko}</p>
+                                            {mangaDetails?.attributes?.altTitles.find((titleObj: { [key: string]: string }) => titleObj.hasOwnProperty('ko'))?.ko}</p>
                                         <p className="mb-6 sm:mb-28 w-full sm:w-44">
                                             {mangaDetails?.attributes?.altTitles.find((titleObj: { [key: string]: string }) => titleObj.hasOwnProperty('ja-ro'))?.['ja-ro']}
                                         </p>
@@ -90,7 +91,7 @@ function Manga() {
                                 {/* Description Section - Full Width on Mobile */}
                                 <div className="w-full p-4">
                                     <p
-                                        className={`text-sm mt-5 w-full leading-6 h-14 max-h-34 overflow-hidden transition-all duration-500 ${!readmore ? "h-14" : "h-24"
+                                        className={`text-sm mt-5 w-full md:w-1/2 leading-6 h-10 max-h-34 overflow-hidden transition-all duration-500 ${!readmore ? "h-10" : "h-24"
                                             }`}
                                     >
                                         {mangaDetails?.attributes.description['en']}
@@ -102,12 +103,16 @@ function Manga() {
                                         {readmore ? "readLess" : "Read More"}
                                     </button>
                                 </div>
+
+                                
+                                {/* //manga Chapters */}
+                                <Chapters />
                             </div>
+
                         </div>
                     </>
                     : "...loading"
             }
-
         </>
     )
 }

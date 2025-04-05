@@ -6,6 +6,7 @@ import { responsive } from "./CarauselComponent";
 import axios from 'axios'
 import { ApiUrl } from "../config/ApiUrl";
 import { Link } from "react-router-dom";
+import Latest from "./Latest";
 
 
 
@@ -26,9 +27,6 @@ const Hero = () => {
     useEffect(()=>{
         axios.get(`${ApiUrl.baseUrl}?limit=20&order[followedCount]=desc&includes[]=cover_art&availableTranslatedLanguage[]=en`)
         .then((response)=>{
-            console.log(response)
-
-
             interface MangaResponse {
                 id: string;
                 attributes: {
@@ -69,7 +67,6 @@ const Hero = () => {
                             <CarouselComponent responsive={responsive}>
                                 {
                                     manga.map((data) => {
-                                        console.log({mangaId: data.id})
                                         return (
                                             <Link to={`/manga/${data.title}/${data.id}`} className=" w-full  " key={data.id}>
                                                 <div>
@@ -87,6 +84,7 @@ const Hero = () => {
                 }
             </div>
             <Featured/>
+            <Latest/>
         </>
     )
 }

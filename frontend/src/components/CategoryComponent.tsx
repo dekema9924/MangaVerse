@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { ApiUrl } from '../config/ApiUrl';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 interface CategoryComponentProps {
     category: string;
@@ -23,20 +24,20 @@ const responsive = {
     desktop: {
         breakpoint: { max: 3000, min: 1024 },
         items: 14,
-        slidesToSlide: 4, // Moves 4 slides at a time
+        slidesToSlide: 4, 
 
     },
     tablet: {
         breakpoint: { max: 1024, min: 464 },
         items: 2,
-        slidesToSlide: 2, // Moves 4 slides at a time
+        slidesToSlide: 2,
 
     },
 
     mobile: {
         breakpoint: { max: 464, min: 0 },
         items: 2,
-        slidesToSlide: 1, // Moves 4 slides at a time
+        slidesToSlide: 1, 
 
     },
 };
@@ -71,10 +72,11 @@ function CategoryComponent({ children, category, url }: CategoryComponentProps) 
 
                 const mangaData = response.data.data.map((manga: MangaResponse) => {
                     const title = manga.attributes.title.en || manga.attributes.title["en-US"];
+                    const id = manga.id
                     const cover = manga.relationships.find((rel: { type: string }) => rel.type === 'cover_art');
-                    const coverUrl = cover ? `https://uploads.mangadex.org/covers/${manga.id}/${cover.attributes.fileName}` : '';
+                    const coverUrl = cover ? `https://uploads.mangadex.org/covers/${manga.id}/${cover.attributes.fileName}` : 'https://placehold.co/600x400/000000/FFFFFF/png';
 
-                    return { title, coverUrl }
+                    return { title, coverUrl, id }
                 });
 
                 setManga(mangaData)
@@ -96,13 +98,13 @@ function CategoryComponent({ children, category, url }: CategoryComponentProps) 
                                 {
                                     manga.map((data) => {
                                         return (
-                                            <div className=" mt-10 mx-4" key={data.id}>
+                                            <Link to={`/manga/${data.title}/${data.id}`} className=" mt-10 mx-4" key={data.id}>
                                                 <div>
                                                     <img className=" md:w-22 w-80 md:h-44 m-auto object-center  object-cover rounded-md" src={data.coverUrl} alt="mangaCover" />
                                                 </div>
                                                 <p className="text-sm  w-full text-center h-14 overflow-hidden font-bold pt-1">{data.title}</p>
 
-                                            </div>
+                                            </Link>
                                         )
                                     })
                                 }

@@ -5,6 +5,9 @@ import { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import LanguageIcon from '@mui/icons-material/Language';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import HomeFilledIcon from '@mui/icons-material/HomeFilled';
+import { Link } from 'react-router-dom';
+
 
 const Header = () => {
 
@@ -18,7 +21,7 @@ const Header = () => {
                     <div onClick={() => setMenuClicked(true)}>
                         <MenuIcon className='cursor-pointer' style={{ fontSize: '30px' }} />
                     </div>
-                    <h1 className='text-[1.4em]'>Manga<span className='font-bold text-orange-500'>Verse</span></h1>
+                  <Link to={'/'}><h1 className='text-[1.4em]'>Manga<span className='font-bold text-orange-500'>Verse</span></h1></Link>
                 </div>
                 <p className='md:mr-10 mr-2 p-1 bg-orange-500 text-white rounded-md w-34 text-center font-bold'>MangaDexAPI</p>
             </header>
@@ -30,6 +33,7 @@ const Header = () => {
                     <div className='cursor-pointer' onClick={()=>setMenuClicked(false)}>
                         <CloseIcon />
                     </div>
+                    
                 </div>
                 <hr />
 
@@ -38,6 +42,12 @@ const Header = () => {
                     <AccountCircleIcon/>
                     <p>Account</p>
                 </div>
+                <Link to={'/'} className='flex items-center w-11/12 my-1  bg-gray-700 gap-2'>
+                    <div className='bg-orange-500 rounded-md w-8 h-8 text-center'>
+                        <HomeFilledIcon className=' text-white ' />
+                    </div>
+                    <p>Home</p>
+                </Link>
 
                 {/* //general */}
 
