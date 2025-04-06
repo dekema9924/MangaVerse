@@ -18,7 +18,7 @@ function Manga() {
             {
                 !loading ?
                     <>
-                        <div className="mt-10 relative">
+                        <div className="mt-10 relative ">
                             <div className="bg-no-repeat bg-cover relative h-66 bg-black">
                                 {/* Background Image with Opacity */}
                                 <div
@@ -102,9 +102,7 @@ function Manga() {
                                     >
                                         {readmore ? "readLess" : "Read More"}
                                     </button>
-                                </div>
-
-                                
+                                </div>               
                                 {/* //manga Chapters */}
                                 <Chapters />
                             </div>

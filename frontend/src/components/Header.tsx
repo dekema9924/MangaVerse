@@ -1,18 +1,17 @@
 import MenuIcon from '@mui/icons-material/Menu';
 import SettingsIcon from '@mui/icons-material/Settings';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import LanguageIcon from '@mui/icons-material/Language';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HomeFilledIcon from '@mui/icons-material/HomeFilled';
 import { Link } from 'react-router-dom';
-
+import Footer from './Footer';
+import { useMenu } from '../context/MenuContext';
 
 const Header = () => {
 
-    const [MenuClicked, setMenuClicked] = useState(false)
-
+    const {MenuClicked, setMenuClicked} = useMenu()
 
     return (
         <>
@@ -81,6 +80,8 @@ const Header = () => {
                     </div>
                     <p>Website</p>
                 </div>
+
+                <Footer/>
             </aside>
         </>
     )

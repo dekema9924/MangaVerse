@@ -8,6 +8,7 @@ import { ApiUrl } from '../config/ApiUrl';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Skeleton from '@mui/material/Skeleton';
 
 interface CategoryComponentProps {
     category: string;
@@ -112,7 +113,23 @@ function CategoryComponent({ children, category, url }: CategoryComponentProps) 
 
                         </div>
                     </>
-                    : "...loading"
+                    : 
+                    <>
+                         <div className="flex gap-6 px-2 mt-20  ">
+                                {[...Array(14)].map((_, idx) => (
+                                    <div key={idx} className="flex-shrink-0 bg-gray-300 opacity-5 animate-pulse ">
+                                        <Skeleton
+                                            variant="rectangular"
+                                            width={220}
+                                            height={220}
+                                            // animation="wave"
+                                            className="rounded-md shadow"
+
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                    </>
             }
         </>
     )

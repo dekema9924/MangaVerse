@@ -1,6 +1,6 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import  { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 function Chapters() {
@@ -10,6 +10,7 @@ function Chapters() {
     const [openVolume, setOpenVolume] = useState<string | null>(null);
     const [page, setPage] = useState(1);
     const chaptersPerPage = 10;
+
     useEffect(() => {
         if (!id) return;
     
@@ -99,13 +100,13 @@ function Chapters() {
                                     {chapters
                                         .filter(chap => chap.volume === volume)
                                         .map(chap => (
-                                            <div
+                                            <Link to={`/${chap.title}/${id}/${chap.id}`}
                                                 key={chap.id}
                                                 className='flex justify-between p-2 bg-gray-700 rounded-md my-2'
                                             >
                                                 <p>{chap.title}</p>
                                                 <p>{chap.formattedDate}</p>
-                                            </div>
+                                            </Link>
                                         ))}
                                 </div>
                             )}
