@@ -67,7 +67,7 @@ function CompletedComponent({ children, completed, url }: completedComponentProp
                                     manga.map((data) => (
                                         <Link to={`/manga/${data.title}/${data.id}`} className="mt-10 mx-4" key={data.id}>
                                             <div>
-                                                <img className="md:w-22 w-80 md:h-44 m-auto object-center object-cover rounded-md" src={data.coverUrl} alt="mangaCover" />
+                                                <img referrerPolicy="no-referrer" className="md:w-22 w-80 md:h-44 m-auto object-center object-cover rounded-md" src={data.coverUrl} alt="mangaCover" />
                                             </div>
                                             <p className="text-sm w-full text-center h-14 overflow-hidden font-bold pt-1">{data.title}</p>
                                         </Link>

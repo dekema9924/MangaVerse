@@ -105,6 +105,7 @@ function ChapterReader() {
         {error && <p className="text-red-400">{error}</p>}
         {!loading && !error && imageUrls.map((url, idx) => (
           <img
+            referrerPolicy="no-referrer"
             loading='lazy'
             key={idx}
             src={url}

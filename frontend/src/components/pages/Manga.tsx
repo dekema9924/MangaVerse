@@ -21,15 +21,16 @@ function Manga() {
                         <div className="mt-10 relative ">
                             <div className="bg-no-repeat bg-cover relative h-66 bg-black">
                                 {/* Background Image with Opacity */}
-                                <div
-                                    className="absolute inset-0 bg-black opacity-50"
-                                    style={{
-                                        backgroundImage:
-                                            `url(${coverUrl ? coverUrl : "https://placehold.co/600x400/000000/FFFFFF/pn"})`,
-                                        backgroundSize: "cover",
-                                        backgroundPosition: "center",
-                                    }}
-                                ></div>
+                                <div className="relative w-full h-64 overflow-hidden rounded-lg">
+                                    <img
+                                        src={coverUrl || "https://placehold.co/600x400/000000/FFFFFF/pn"}
+                                        alt="Cover"
+                                        referrerPolicy="no-referrer"
+                                        className="absolute inset-0 w-full h-full object-cover"
+                                    />
+                                    <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+                                    {/* Your content on top */}
+                                </div>
 
                                 {/* Content that stays unaffected */}
                                 <div className="relative z-10 p-4 flex flex-col sm:flex-row w-full">
@@ -37,6 +38,7 @@ function Manga() {
                                         className="md:w-66 w-full sm:w-33 object-cover h-66 md:h-96"
                                         src={coverUrl ? coverUrl : "https://placehold.co/600x400/000000/FFFFFF/png"}
                                         alt="mangaCover"
+                                        referrerPolicy="no-referrer"
                                     />
                                     <div className="mt-4 sm:mt-0 sm:ml-4 text-white relative w-full">
                                         <p className="text-xl font-bold md:text-[4em]">{mangaDetails?.attributes?.title['en']}</p>
@@ -102,7 +104,7 @@ function Manga() {
                                     >
                                         {readmore ? "readLess" : "Read More"}
                                     </button>
-                                </div>               
+                                </div>
                                 {/* //manga Chapters */}
                                 <Chapters />
                             </div>
