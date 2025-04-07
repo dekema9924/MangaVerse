@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { ApiUrl } from "../config/ApiUrl";
 
-console.log(ApiUrl);
-
 // Define interfaces for the Manga structure
 interface MangaAttributes {
     title: { en: string };

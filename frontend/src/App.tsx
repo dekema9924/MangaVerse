@@ -4,6 +4,7 @@ import { lazy, Suspense } from 'react';
 import Privacy from './components/pages/Privacy'
 import TermsOfService from "./components/pages/TermsOfSerive";
 import { useMenu } from "./context/MenuContext";
+import {useEffect} from "react";
 
 // Lazy-loaded components
 const Hero = lazy(() => import("./components/Hero"));
@@ -15,7 +16,6 @@ const ChapterReader = lazy(() => import("./components/pages/ChapterReader"));
 function App() {
   const { MenuClicked, setMenuClicked } = useMenu()
 
-
   return (
     <>
       <Suspense fallback={<div>Loading...</div>}>
@@ -24,7 +24,7 @@ function App() {
           {MenuClicked && (
             <div onClick={()=>setMenuClicked(false)} className="fixed inset-0 z-44  opacity-10 transition-opacity duration-300"></div>
           )}
-          <main className={`flex-grow w-11/12 mx-auto py-8 ${MenuClicked ? "opacity-15 overflow-hidden" : ""}`}>
+          <main className={`flex-grow w-11/12 mx-auto py-8 ${MenuClicked ? "opacity-20 " : "overflow-auto"}`}>
             <Routes>
               <Route path="/" element={<Hero />} />
               <Route path="/manga/:title/:id" element={<Manga />} />

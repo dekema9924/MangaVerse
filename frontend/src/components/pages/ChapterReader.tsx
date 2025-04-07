@@ -72,6 +72,7 @@ function ChapterReader() {
         <ArrowBackIosNewIcon /> Back to Manga
       </Link>
 
+      {/* //next chapter button */}
       {chapterList.length > 0 && (
         <div className="flex items-center gap-4 mb-4 flex-wrap  ">
           <select value={chapterId} onChange={handleDropdownChange} className="bg-gray-800 text-white p-2 rounded  w-11/12 md:w-96">
@@ -112,6 +113,36 @@ function ChapterReader() {
           />
         ))}
       </div>
+
+
+      {/* //next chapter button */}
+
+      {chapterList.length > 0 && (
+        <div className="flex items-center gap-4 mb-4 flex-wrap  ">
+          <select value={chapterId} onChange={handleDropdownChange} className="bg-gray-800 text-white p-2 rounded  w-11/12 md:w-96">
+            {chapterList.map((c) => (
+              <option key={c.id} value={c.id}>
+                Vol {c.volume} - Ch {c.chapter} - {c.title}
+              </option>
+            ))}
+          </select>
+
+          <button
+            disabled={!prevChapter}
+            onClick={() => navigate(`/${title}/${id}/${prevChapter?.id}`)}
+            className="bg-orange-500 px-4 py-1 rounded text-white disabled:opacity-50 cursor-pointer"
+          >
+            Prev
+          </button>
+          <button
+            disabled={!nextChapter}
+            onClick={() => navigate(`/${title}/${id}/${nextChapter?.id}`)}
+            className="bg-orange-500 px-4 py-1 rounded text-white disabled:opacity-50 cursor-pointer"
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 }

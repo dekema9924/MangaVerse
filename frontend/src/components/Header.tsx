@@ -8,10 +8,24 @@ import HomeFilledIcon from '@mui/icons-material/HomeFilled';
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
 import { useMenu } from '../context/MenuContext';
+import { useEffect } from 'react';
 
 const Header = () => {
 
     const {MenuClicked, setMenuClicked} = useMenu()
+
+    useEffect(() => {
+        if (MenuClicked) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = '';
+        }
+      
+        return () => {
+          document.body.style.overflow = '';
+        };
+      }, [MenuClicked]);
+    
 
     return (
         <>
@@ -26,7 +40,7 @@ const Header = () => {
             </header>
 
             {/* //sideBar */}
-            <aside className={` w-55 h-[100vh] pl-2 border-[1px] absolute -left-100 transition-all duration-500 top-0 z-50 bg-black ${MenuClicked ? "left-0" : "-left-100"} `}>
+            <aside className={` w-55 h-[100vh] pl-2 border-r-[1px] absolute -left-100 transition-all duration-500 top-0 z-50 bg-black ${MenuClicked ? "left-0" : "-left-100"} `}>
                 <div className='flex items-center justify-between p-2'>
                     <h1>Menu</h1>
                     <div className='cursor-pointer' onClick={()=>setMenuClicked(false)}>
