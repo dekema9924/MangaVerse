@@ -1,4 +1,4 @@
 
 export const ApiUrl = {
-    baseUrl: 'https://api.mangadex.org/manga'
+    baseUrl: 'http://localhost:3000/manga',
 }

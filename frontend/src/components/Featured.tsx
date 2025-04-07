@@ -2,9 +2,10 @@
 import CategoryComponent from "./CategoryComponent"
 
 function Featured() {
+  const query = 'limit=40&order[latestUploadedChapter]=desc&includes[]=cover_art&availableTranslatedLanguage[]=en';
   return (
     <>
-        <CategoryComponent category="Weekly" url="limit=40&order[latestUploadedChapter]=desc&includes[]=cover_art&availableTranslatedLanguage[]=en"> </CategoryComponent>
+      <CategoryComponent category="Weekly" url={encodeURIComponent(query)}/> 
     </>
   )
 }

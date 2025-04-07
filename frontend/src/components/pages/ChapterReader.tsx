@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { ApiUrl } from '../../config/ApiUrl';
 
 function ChapterReader() {
   const { chapterId, id, title } = useParams();
@@ -16,21 +17,14 @@ function ChapterReader() {
     if (!chapterId) return;
 
     const fetchImages = async () => {
+      // Fetch chapter images
       try {
         setLoading(true);
         setError(null);
         setImageUrls([]);
 
-        const res = await axios.get(`https://api.mangadex.org/at-home/server/${chapterId}`);
-        const { baseUrl, chapter } = res.data;
-
-        if (!chapter.hash || !chapter.data?.length) {
-          setError("This chapter is unavailable or missing images.");
-          return;
-        }
-
-        const urls = chapter.data.map((filename: string) => `${baseUrl}/data/${chapter.hash}/${filename}`);
-        setImageUrls(urls);
+        const res = await axios.get(`${ApiUrl.baseUrl}/chapter-images/${chapterId}`);
+        setImageUrls(res.data.imageUrls);
       } catch (err) {
         setError("Failed to load chapter images.");
       } finally {
@@ -39,8 +33,13 @@ function ChapterReader() {
       }
     };
 
-    fetchImages();
+    fetchImages()
   }, [chapterId]);
+
+
+
+
+
 
   // Fetch all chapters
   useEffect(() => {
@@ -48,28 +47,8 @@ function ChapterReader() {
 
     const fetchChapters = async () => {
       try {
-        let allChapters: any[] = [];
-        let offset = 0;
-        let hasMore = true;
-
-        while (hasMore) {
-          const res = await axios.get(`https://api.mangadex.org/chapter?manga=${id}&translatedLanguage[]=en&order[chapter]=asc&limit=100&offset=${offset}`);
-          const data = res.data.data;
-          allChapters = [...allChapters, ...data];
-          hasMore = data.length === 100;
-          offset += 100;
-        }
-
-        const filtered = allChapters
-          .filter((chap) => chap.attributes.chapter && chap.attributes.title)
-          .map((chap) => ({
-            id: chap.id,
-            chapter: chap.attributes.chapter,
-            volume: chap.attributes.volume || 'N/A',
-            title: chap.attributes.title
-          }));
-
-        setChapterList(filtered);
+        const res = await axios.get(`${ApiUrl.baseUrl}/chapters/${id}`);
+        setChapterList(res.data);
       } catch (err) {
         console.error("Failed to fetch chapters", err);
       }
@@ -97,7 +76,7 @@ function ChapterReader() {
         <div className="flex items-center gap-4 mb-4 flex-wrap  ">
           <select value={chapterId} onChange={handleDropdownChange} className="bg-gray-800 text-white p-2 rounded  w-11/12 md:w-96">
             {chapterList.map((c) => (
-              <option  key={c.id} value={c.id}>
+              <option key={c.id} value={c.id}>
                 Vol {c.volume} - Ch {c.chapter} - {c.title}
               </option>
             ))}

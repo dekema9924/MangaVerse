@@ -1,15 +1,16 @@
 
 
-import CategoryComponent from "./CategoryComponent"
+import CompletedComponent from "./Completed"
 
 function Latest() {
+    const query = 'limit=40&order[updatedAt]=desc&includes[]=cover_art&availableTranslatedLanguage[]=en&status[]=completed'
   return (
-    <CategoryComponent 
-        category="Completed"
-        url="limit=40&order[updatedAt]=desc&includes[]=cover_art&availableTranslatedLanguage[]=en&status[]=completed"
-    >
+    <CompletedComponent
+        completed="Completed"
+        url={encodeURIComponent(query)}
+
+    />
         
-    </CategoryComponent>
   )
 }
 
