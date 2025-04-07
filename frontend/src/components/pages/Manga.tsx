@@ -21,16 +21,16 @@ function Manga() {
                         <div className="mt-10 relative ">
                             <div className="bg-no-repeat bg-cover relative h-66 bg-black">
                                 {/* Background Image with Opacity */}
-                                <div className="relative w-full h-64 overflow-hidden rounded-lg">
+                                {coverUrl ? (
                                     <img
-                                        src={coverUrl || "https://placehold.co/600x400/000000/FFFFFF/pn"}
+                                        src={coverUrl}
                                         alt="Cover"
+                                        className="absolute inset-0 w-full h-full object-cover opacity-50"
                                         referrerPolicy="no-referrer"
-                                        className="absolute inset-0 w-full h-full object-cover"
                                     />
-                                    <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-                                    {/* Your content on top */}
-                                </div>
+                                ) : (
+                                    <div className="absolute inset-0 bg-black opacity-50"></div>
+                                )}
 
                                 {/* Content that stays unaffected */}
                                 <div className="relative z-10 p-4 flex flex-col sm:flex-row w-full">
