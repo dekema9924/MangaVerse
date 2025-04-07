@@ -4,7 +4,6 @@ import { lazy, Suspense } from 'react';
 import Privacy from './components/pages/Privacy'
 import TermsOfService from "./components/pages/TermsOfSerive";
 import { useMenu } from "./context/MenuContext";
-import {useEffect} from "react";
 
 // Lazy-loaded components
 const Hero = lazy(() => import("./components/Hero"));
