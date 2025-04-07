@@ -1,0 +1,6 @@
+.env
+node_module
+Store
+package-lock.json
+npm-debug.log
+*.tsbuildinfo
