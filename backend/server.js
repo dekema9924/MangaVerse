@@ -10,7 +10,7 @@ const cors = require('cors');
 
 // Middleware
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://m0ngaverse.netlify.app',
     
 }));
 app.use('/manga', mangaRouter)
