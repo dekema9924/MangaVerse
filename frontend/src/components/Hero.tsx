@@ -44,7 +44,7 @@ const Hero = () => {
                                         return (
                                             <Link to={`/manga/${data.title}/${data.id}`} className="w-full" key={data.id}>
                                                 <div>
-                                                    <img className="md:w-[256px] w-96 h-96 m-auto object-center md:h-[366px] object-cover rounded-md" src={data.coverUrl} alt="mangaCover" />
+                                                    <img referrerPolicy="no-referrer" className="md:w-[256px] w-96 h-96 m-auto object-center md:h-[366px] object-cover rounded-md" src={data.coverUrl} alt="mangaCover" />
                                                 </div>
                                                 <p className="text-2xl md:text-lg text-center font-bold pt-1">{data.title}</p>
                                             </Link>
