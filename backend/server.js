@@ -4,6 +4,11 @@ const mangaRouter = require('./routes/MangaRoutes/MangaRoutes');
 const port = process.env.PORT || 3000;
 const app = express();
 const cors = require('cors');
+const userRoutes = require('./routes/UserRoutes/userRoutes');
+const dbConfig = require('./config/dbConfig');
+var cookieParser = require('cookie-parser')
+
+
 
 
 
@@ -13,7 +18,11 @@ app.use(cors({
     origin: 'https://m0ngaverse.netlify.app',
     
 }));
+app.use(cookieParser())
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use('/manga', mangaRouter)
+app.use(userRoutes)
 
 
 
