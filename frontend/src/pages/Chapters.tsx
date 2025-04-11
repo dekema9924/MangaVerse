@@ -2,7 +2,7 @@ import axios from 'axios';
 import  { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { ApiUrl } from '../../config/ApiUrl';
+import { ApiUrl } from '../config/ApiUrl';
 
 function Chapters() {
     const { id } = useParams();

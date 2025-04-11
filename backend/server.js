@@ -15,8 +15,9 @@ var cookieParser = require('cookie-parser')
 
 // Middleware
 app.use(cors({
-    origin: 'https://m0ngaverse.netlify.app',
-    
+    origin: process.env.NODE_ENV === 'development'
+      ? 'http://localhost:5173' // local frontend during development
+      : 'https://m0ngaverse.netlify.app' // deployed frontend in production
 }));
 app.use(cookieParser())
 app.use(express.json());

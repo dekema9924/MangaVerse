@@ -1,14 +1,16 @@
 import Header from "./components/Header"
 import { Route, Routes } from "react-router-dom"
 import { lazy, Suspense } from 'react';
-import Privacy from './components/pages/Privacy'
-import TermsOfService from "./components/pages/TermsOfSerive";
+import Privacy from "./pages/Privacy";
+import TermsOfService from "./pages/TermsOfSerive";
 import { useMenu } from "./context/MenuContext";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 // Lazy-loaded components
 const Hero = lazy(() => import("./components/Hero"));
-const Manga = lazy(() => import("./components/pages/Manga"));
-const ChapterReader = lazy(() => import("./components/pages/ChapterReader"));
+const Manga = lazy(() => import("./pages/Manga"));
+const ChapterReader = lazy(() => import("./pages/ChapterReader"));
 
 
 
@@ -30,6 +32,8 @@ function App() {
               <Route path="/:title/:id/:chapterId" element={<ChapterReader />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<TermsOfService />} />
+              <Route path="/login" element={<Login/>}/>
+              <Route path="/register" element={<Register/>}/>
             </Routes>
           </main>
         </div>

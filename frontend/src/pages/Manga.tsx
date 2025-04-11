@@ -4,7 +4,7 @@ import { useState } from 'react'
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import { useParams } from 'react-router-dom'
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-import useGetDetails from '../../hooks/useGetDetails';
+import useGetDetails from '../hooks/useGetDetails';
 import Chapters from './Chapters';
 
 function Manga() {
