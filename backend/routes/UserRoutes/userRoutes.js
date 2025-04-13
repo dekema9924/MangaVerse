@@ -11,9 +11,13 @@ const userRoutes = express.Router();
 
 //routes 
 
-userRoutes.get("/", login )
+userRoutes.get('/register', (req,res)=>{
+    res.send('testing')
+})
 
-userRoutes.get("/register", register )
+userRoutes.post("/", login )
+
+userRoutes.post("/register", register )
 
 userRoutes.get('/profile', verifyToken, profile)
 

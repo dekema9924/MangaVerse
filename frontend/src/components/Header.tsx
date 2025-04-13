@@ -9,9 +9,13 @@ import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import { useMenu } from "../context/MenuContext";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
   const { MenuClicked, setMenuClicked } = useMenu();
+  const location = useLocation()
+
+  console.log(location.pathname)
 
   useEffect(() => {
     if (MenuClicked) {
@@ -41,12 +45,19 @@ const Header = () => {
 
         {/* //login btn */}
         <div className="flex gap-4 items-center mr-4">
-          <Link to={"/register"} className="underline">
-            Register
-          </Link>
-          <Link to={"/login"} className=" underline">
-            Login
-          </Link>
+          {
+            location.pathname === '/register' ? (
+              <Link to="/login" className="underline">Login</Link>
+            ) : location.pathname === '/login' ? (
+              <Link to="/register" className="underline">Register</Link>
+            ) : (
+              <>
+                <Link to="/login" className="underline mr-4">Login</Link>
+                <Link to="/register" className="underline">Register</Link>
+              </>
+            )
+          }
+
           <p className="md:mr-10 mr-2 p-1 bg-orange-500 text-white rounded-md w-34 text-center font-bold md:block hidden">
             MangaDexAPI
           </p>
@@ -55,9 +66,8 @@ const Header = () => {
 
       {/* //sideBar */}
       <aside
-        className={` w-55 h-[100vh] pl-2 border-r-[1px] absolute -left-100 transition-all duration-500 top-0 z-50 bg-black ${
-          MenuClicked ? "left-0" : "-left-100"
-        } `}
+        className={` w-55 h-[100vh] pl-2 border-r-[1px] absolute -left-100 transition-all duration-500 top-0 z-50 bg-black ${MenuClicked ? "left-0" : "-left-100"
+          } `}
       >
         <div className="flex items-center justify-between p-2">
           <h1>Menu</h1>

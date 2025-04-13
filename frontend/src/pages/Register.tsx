@@ -2,12 +2,29 @@ import { useState } from "react";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { userUrl } from "../config/ApiUrl";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
+
+//interface
+export interface userInterface {
+  username: string
+  password: string
+  email: string
+}
 function Register() {
+  const navigate = useNavigate()
   const [hidden, setHidden] = useState("password");
+  const [input, setInput] = useState<userInterface>({
+    username: "",
+    password: "",
+    email: "",
+  });
 
-  const [input, setInput] = useState({});
 
+  //input functions
   const HandleInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setInput({
       ...input,
@@ -15,10 +32,28 @@ function Register() {
     });
   };
 
+  //create accout function
   const HandleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log(input);
-  };
+
+    //make axios request
+    axios.post(`${userUrl.baseUrl}/register`, {
+      username: input.username,
+      email: input.email,
+      password: input.password
+    })
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.message === 'User registered successfully') {
+          toast.success('Success')
+          navigate('/login')
+        }
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message)
+      });
+  }
+
 
   return (
     <>
@@ -33,6 +68,14 @@ function Register() {
             type="text"
             name="username"
             placeholder="username"
+            onChange={(e) => HandleInput(e)}
+          />
+
+          <input
+            className="border-2 w-full  h-12 pl-8 rounded-md outline-orange-500"
+            type="email"
+            name="email"
+            placeholder="Email"
             onChange={(e) => HandleInput(e)}
           />
 
@@ -62,13 +105,7 @@ function Register() {
             )}
           </div>
 
-          <input
-            className="border-2 w-full  h-12 pl-8 rounded-md outline-orange-500"
-            type="email"
-            name="email"
-            placeholder="Email"
-            onChange={(e) => HandleInput(e)}
-          />
+
           <button className="h-10 bg-white text-black rounded-xl w-full cursor-pointer hover:bg-orange-500 hover:text-white transition-all duration-500 ">
             Register
           </button>

@@ -2,11 +2,20 @@ import { useState } from "react";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { userInterface } from "./Register";
+import toast from "react-hot-toast";
+import { userUrl } from "../config/ApiUrl";
 
 function Login() {
   const [hidden, setHidden] = useState("password");
+  const [input, setInput] = useState<Omit<userInterface, 'username'>>({
+    email: "",
+    password: ""
+  });
 
-  const [input, setInput] = useState({});
+  const navigate = useNavigate()
 
   const HandleInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setInput({
@@ -17,7 +26,23 @@ function Login() {
 
   const HandleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log(input);
+
+
+    //make axios request
+    axios.post(`${userUrl.baseUrl}`, {
+      email: input.email,
+      password: input.password
+    })
+      .then((response) => {
+        console.log(response.data.user.id);
+        if (response.data.user.id) {
+          toast.success(response.data.message)
+          navigate('/')
+        }
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message)
+      });
   };
 
   return (
@@ -31,8 +56,8 @@ function Login() {
           <input
             className="border-2 w-full h-12 pl-8 rounded-md outline-orange-500"
             type="text"
-            name="username"
-            placeholder="username or email"
+            name="email"
+            placeholder=" Email"
             onChange={(e) => HandleInput(e)}
           />
 
