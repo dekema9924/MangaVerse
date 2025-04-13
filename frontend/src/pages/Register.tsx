@@ -43,7 +43,6 @@ function Register() {
       password: input.password
     })
       .then((response) => {
-        console.log(response.data);
         if (response.data.message === 'User registered successfully') {
           toast.success('Success')
           navigate('/login')

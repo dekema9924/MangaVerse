@@ -1,10 +1,12 @@
 
+console.log(import.meta.env.MODE)
+console.log(import.meta.env.VITE_API_URL)
+const BASE = import.meta.env.VITE_API_URL;
 
 //api
+
 export const ApiUrl = {
-  baseUrl: import.meta.env.MODE === 'development'
-    ? 'http://localhost:3000/manga'  // your local server
-    : 'https://mangaverse-jg2h.onrender.com/manga' // deployed API
+  baseUrl: `${BASE}/manga`
 };
 
 
@@ -12,7 +14,5 @@ export const ApiUrl = {
 
 //user
 export const userUrl = {
-  baseUrl: import.meta.env.MODE === 'development'
-    ? 'http://localhost:3000'  // your local server
-    : 'https://mangaverse-jg2h.onrender.com' // deployed API
-}
+  baseUrl: BASE
+};

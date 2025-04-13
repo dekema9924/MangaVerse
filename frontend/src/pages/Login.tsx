@@ -29,12 +29,12 @@ function Login() {
 
 
     //make axios request
+    axios.defaults.withCredentials = true
     axios.post(`${userUrl.baseUrl}`, {
       email: input.email,
       password: input.password
     })
       .then((response) => {
-        console.log(response.data.user.id);
         if (response.data.user.id) {
           toast.success(response.data.message)
           navigate('/')
@@ -88,7 +88,7 @@ function Login() {
           </div>
 
           <button className="h-10 bg-white text-black rounded-xl w-full cursor-pointer hover:bg-orange-500 hover:text-white transition-all duration-500 ">
-            Register
+            Login
           </button>
           <p>
             {" "}
