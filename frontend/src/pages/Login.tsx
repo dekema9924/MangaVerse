@@ -33,7 +33,7 @@ function Login() {
     axios.post(`${userUrl.baseUrl}`, {
       email: input.email,
       password: input.password
-    })
+    }, { withCredentials: true })
       .then((response) => {
         if (response.data.user.id) {
           toast.success(response.data.message)

@@ -2,6 +2,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import CloseIcon from "@mui/icons-material/Close";
+import LogoutIcon from '@mui/icons-material/Logout';
 import LanguageIcon from "@mui/icons-material/Language";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import HomeFilledIcon from "@mui/icons-material/HomeFilled";
@@ -10,14 +11,39 @@ import Footer from "./Footer";
 import { useMenu } from "../context/MenuContext";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/Store";
+import cookies from 'js-cookie'
+import useGetUser from "../hooks/useGetUSer";
+import { logout } from "../features/UserSlice";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const { MenuClicked, setMenuClicked } = useMenu();
   const location = useLocation()
+  const user = useSelector((state: RootState) => state.user.value)
+  const userToken = cookies.get('token')
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  console.log(location.pathname)
 
+
+  //set user in redux
+  useGetUser()
+
+  //logout function
+  const Logout = () => {
+    dispatch(logout())
+    toast.success('logging out...')
+    cookies.remove('token')
+    navigate('/')
+  }
+
+
+  //handle hamburger menu
   useEffect(() => {
+    console.log(user)
     if (MenuClicked) {
       document.body.style.overflow = "hidden";
     } else {
@@ -27,7 +53,9 @@ const Header = () => {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [MenuClicked]);
+  }, [MenuClicked, userToken]);
+
+
 
   return (
     <>
@@ -46,16 +74,22 @@ const Header = () => {
         {/* //login btn */}
         <div className="flex gap-4 items-center mr-4">
           {
-            location.pathname === '/register' ? (
-              <Link to="/login" className="underline">Login</Link>
+            user.username.length > 0 ? (
+              <div className="flex gap-4 items-center">
+                <p className="uppercase font-bold w-8 h-8 rounded-full bg-orange-500 flex justify-center items-center">{user.username.slice(0, 2)}</p>
+                <p onClick={() => Logout()}><LogoutIcon className="text-red-500 cursor-pointer" /></p>
+
+              </div>
             ) : location.pathname === '/login' ? (
               <Link to="/register" className="underline">Register</Link>
-            ) : (
-              <>
-                <Link to="/login" className="underline mr-4">Login</Link>
-                <Link to="/register" className="underline">Register</Link>
-              </>
-            )
+            ) :
+
+              (
+                <>
+                  <Link to="/login" className="underline mr-4">Login</Link>
+                  <Link to="/register" className="underline">Register</Link>
+                </>
+              )
           }
 
           <p className="md:mr-10 mr-2 p-1 bg-orange-500 text-white rounded-md w-34 text-center font-bold md:block hidden">
