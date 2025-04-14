@@ -5,7 +5,7 @@ const verifyToken = require('../../middleware/verifyToken')
 const bookmarkRouter = express.Router()
 const addbookmark = require('../../controllers/BookmarkController/addbookmark')
 const getbookmark = require('../../controllers/BookmarkController/getbookmark')
-const deleteBookmark = require('../../controllers/BookmarkController/deletebookmark');
+const deleteBookmark = require('../../controllers/BookmarkController/deleteBookmark');
 
 
 
