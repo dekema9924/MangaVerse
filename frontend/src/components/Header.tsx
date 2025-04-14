@@ -3,7 +3,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import CloseIcon from "@mui/icons-material/Close";
 import LogoutIcon from '@mui/icons-material/Logout';
-import LanguageIcon from "@mui/icons-material/Language";
+// import LanguageIcon from "@mui/icons-material/Language";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import HomeFilledIcon from "@mui/icons-material/HomeFilled";
 import { Link } from "react-router-dom";
@@ -14,10 +14,11 @@ import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/Store";
 import cookies from 'js-cookie'
-import useGetUser from "../hooks/useGetUSer";
+import useGetUser from "../hooks/useGetUser";
 import { logout } from "../features/UserSlice";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import LoginIcon from '@mui/icons-material/Login';
 
 const Header = () => {
   const { MenuClicked, setMenuClicked } = useMenu();
@@ -100,7 +101,7 @@ const Header = () => {
 
       {/* //sideBar */}
       <aside
-        className={` w-55 h-[100vh] pl-2 border-r-[1px] absolute -left-100 transition-all duration-500 top-0 z-50 bg-black ${MenuClicked ? "left-0" : "-left-100"
+        className={` w-55 h-[100vh] pl-2 border-r-[1px] absolute -left-100 transition-all duration-500 top-0 z-50 bg-black  ${MenuClicked ? "left-0" : "-left-100"
           } `}
       >
         <div className="flex items-center justify-between p-2">
@@ -129,35 +130,50 @@ const Header = () => {
         {/* //general */}
 
         <p className="text-gray-400 mt-4">General</p>
-        <div className="flex items-center w-11/12 my-1  bg-gray-700 gap-2">
-          <div className="bg-orange-500 rounded-md w-8 h-8 text-center">
-            <SettingsIcon className=" text-white " />
-          </div>
-          <p>Settings</p>
-        </div>
-        <div className="flex items-center w-11/12  bg-gray-700 gap-2">
-          <div className="bg-orange-500 rounded-md w-8 h-8 text-center">
-            <NotificationsIcon className=" text-white " />
-          </div>
-          <p>Notification</p>
-        </div>
+        {
+          user.id.length > 0 ?
+            <>
+              <div className="flex items-center w-11/12 my-1  bg-gray-700 gap-2">
+                <div className="bg-orange-500 rounded-md w-8 h-8 text-center">
+                  <SettingsIcon className=" text-white " />
+                </div>
+                <Link to={'/settings'}>Settings</Link>
+              </div>
+              <div className="flex items-center w-11/12  bg-gray-700 gap-2">
+                <div className="bg-orange-500 rounded-md w-8 h-8 text-center">
+                  <NotificationsIcon className=" text-white " />
+                </div>
+                <p>Bookmarks</p>
+              </div>
+            </>
+            :
+            <>
+              <div className="flex items-center w-11/12  bg-gray-700 gap-2 cursor-pointer">
+                <div className="bg-orange-500 rounded-md w-8 h-8 text-center">
+                  <LoginIcon className=" text-white " />
+                </div>
+                <Link to="/login" >Login</Link>
+              </div>
+            </>
+
+        }
 
         {/* //dev options */}
-        <p className="text-gray-400 mt-4">Dev Options</p>
+        {/* <p className="text-gray-400 mt-4">Dev Options</p>
         <div className="bg-gray-700 mt-1 p-2 w-11/12">
           <p className="border-b-[1px] border-gray-500 my-1">Module Logs</p>
           <p className="border-b-[1px] border-gray-500 my-1">Module Creator</p>
           <p className="my-1">Documentation</p>
-        </div>
+        </div> */}
 
         {/* website */}
-        <p className="text-gray-400 mt-4">Website</p>
+        {/* <p className="text-gray-400 mt-4">Website</p>
         <div className="flex items-center w-11/12 my-1  bg-gray-700 gap-2">
           <div className="bg-orange-500 rounded-md w-8 h-8 text-center">
             <LanguageIcon className=" text-white " />
           </div>
           <p>Website</p>
-        </div>
+        </div> */}
 
         <Footer />
       </aside>

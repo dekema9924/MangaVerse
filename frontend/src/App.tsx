@@ -7,6 +7,8 @@ import { useMenu } from "./context/MenuContext";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { Toaster } from 'react-hot-toast';
+import Settings from "./pages/Settings";
+
 
 
 // Lazy-loaded components
@@ -37,6 +39,7 @@ function App() {
               <Route path="/terms" element={<TermsOfService />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/settings" element={<Settings />} />
             </Routes>
           </main>
         </div>
