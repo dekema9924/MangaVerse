@@ -10,4 +10,4 @@ const GetBookmarks = async (req, res) => {
 }
 
 
-module.exports = GetBookmarks
+module.exports = GetBookmarks;
