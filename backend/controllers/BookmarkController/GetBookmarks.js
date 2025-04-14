@@ -1,7 +1,7 @@
 const bookmarkdb = require('../../models/BookmarkModel')
 
 
-const GetBookmarks = async (req, res) => {
+const getBookmarks = async (req, res) => {
     await bookmarkdb.find({ userId: req.user.id }).sort({ createdAt: -1 })
         .then((result) => {
             if (!result) return res.status(400).json({ message: 'invalid user' })
@@ -10,4 +10,4 @@ const GetBookmarks = async (req, res) => {
 }
 
 
-module.exports = GetBookmarks;
+module.exports = getBookmarks;
