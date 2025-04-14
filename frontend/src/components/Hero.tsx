@@ -27,10 +27,11 @@ const Hero = () => {
         // Fetch manga data from the backend API
         axios.get(`${ApiUrl.baseUrl}`)
             .then((response) => {
-                setManga(response.data); 
-                setIsLoading(false); 
+                setManga(response.data);
+                setIsLoading(false);
             })
     }, []);
+
 
     return (
         <>
@@ -39,6 +40,7 @@ const Hero = () => {
                     !isLoading ? (
                         <>
                             <CarouselComponent responsive={responsive}>
+
                                 {
                                     manga.map((data) => {
                                         return (
@@ -72,7 +74,7 @@ const Hero = () => {
                 }
             </div>
             <Featured />
-            <Latest/>
+            <Latest />
         </>
     );
 }

@@ -6,11 +6,40 @@ import { useParams } from 'react-router-dom'
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import useGetDetails from '../hooks/useGetDetails';
 import Chapters from './Chapters';
+import axios from 'axios';
+import { userUrl } from '../config/ApiUrl';
+import useUserCookie from '../hooks/useUserCookie';
+import toast from 'react-hot-toast';
 
 function Manga() {
     const { id } = useParams()
     const [readmore, setReadmore] = useState(false)
     const { mangaDetails, loading, coverUrl } = useGetDetails({ id: id || '' });
+    const token = useUserCookie()
+
+    // bookmark manga
+    const HandleAddBookmark = async () => {
+        await axios.post(`${userUrl.baseUrl}/addbookmarks`, {
+            title: mangaDetails?.attributes.altTitles.find(title => title['en']) || mangaDetails?.attributes.title,
+            coverUrl: coverUrl,
+            mangaId: id
+
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            withCredentials: true
+        }).then((response) => {
+            if (response.data.message == 'Bookmarked✅') {
+                console.log(response)
+                toast.success(response.data.message)
+
+            }
+        }).catch((error) => {
+            console.error(error)
+        })
+
+    }
 
     return (
 
@@ -52,10 +81,10 @@ function Manga() {
                                         <div className="px-4  flex flex-col sm:flex-row w-full">
                                             {/* Buttons Section */}
                                             <div className="mt-2 flex flex-row sm:items-center gap-4 flex-wrap w-full">
-                                                <p className="bg-orange-500 px-3 py-1 rounded text-white cursor-pointer hidden md:inline-block">
+                                                <p onClick={HandleAddBookmark} className="bg-orange-500 px-3 py-1 rounded text-white cursor-pointer hidden md:inline-block">
                                                     Add To Library
                                                 </p>
-                                                <div className="bg-orange-500 p-3 md:hidden rounded">
+                                                <div onClick={HandleAddBookmark} className="bg-orange-500 p-3 md:hidden rounded">
                                                     <BookmarkIcon style={{ fontSize: "24px" }} />
                                                 </div>
                                                 <p className="bg-gray-700 px-4 py-2 font-bold rounded-md flex items-center gap-2 cursor-pointer">

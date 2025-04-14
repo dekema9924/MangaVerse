@@ -1,6 +1,5 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import SettingsIcon from "@mui/icons-material/Settings";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import CloseIcon from "@mui/icons-material/Close";
 import LogoutIcon from '@mui/icons-material/Logout';
 // import LanguageIcon from "@mui/icons-material/Language";
@@ -19,6 +18,8 @@ import { logout } from "../features/UserSlice";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import LoginIcon from '@mui/icons-material/Login';
+import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
+
 
 const Header = () => {
   const { MenuClicked, setMenuClicked } = useMenu();
@@ -44,7 +45,6 @@ const Header = () => {
 
   //handle hamburger menu
   useEffect(() => {
-    console.log(user)
     if (MenuClicked) {
       document.body.style.overflow = "hidden";
     } else {
@@ -141,9 +141,9 @@ const Header = () => {
               </div>
               <div className="flex items-center w-11/12  bg-gray-700 gap-2">
                 <div className="bg-orange-500 rounded-md w-8 h-8 text-center">
-                  <NotificationsIcon className=" text-white " />
+                  <BookmarkAddedIcon className=" text-white " />
                 </div>
-                <p>Bookmarks</p>
+                <Link to={'/bookmarks'}>Bookmarks</Link>
               </div>
             </>
             :

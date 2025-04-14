@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { Toaster } from 'react-hot-toast';
 import Settings from "./pages/Settings";
+import Bookmarks from "./pages/Bookmarks";
 
 
 
@@ -40,6 +41,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/settings" element={<Settings />} />
+              <Route path="/bookmarks" element={<Bookmarks />} />
             </Routes>
           </main>
         </div>
