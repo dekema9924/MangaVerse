@@ -6,7 +6,6 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import HomeFilledIcon from "@mui/icons-material/HomeFilled";
 import { Link } from "react-router-dom";
-import Footer from "./Footer";
 import { useMenu } from "../context/MenuContext";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
@@ -175,7 +174,6 @@ const Header = () => {
           <p>Website</p>
         </div> */}
 
-        <Footer />
       </aside>
     </>
   );

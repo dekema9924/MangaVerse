@@ -14,7 +14,7 @@ const BookmarkModel = new mongoose.Schema({
 
 
 
-}, { timeStamps: true })
+}, { timestamps: true })
 
 BookmarkModel.index({ userId: 1, mangaId: 1 }, { unique: true });
 

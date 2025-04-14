@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import { Toaster } from 'react-hot-toast';
 import Settings from "./pages/Settings";
 import Bookmarks from "./pages/Bookmarks";
+import Footer from "./components/Footer";
 
 
 
@@ -45,6 +46,7 @@ function App() {
             </Routes>
           </main>
         </div>
+        <Footer />
       </Suspense>
 
 
