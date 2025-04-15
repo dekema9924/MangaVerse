@@ -50,6 +50,7 @@ function Login() {
                 id: profileRes.data._id,
                 email: profileRes.data.email
               }));
+              navigate('/')
             } catch (error) {
               console.error('Error fetching profile:', error);
             }
