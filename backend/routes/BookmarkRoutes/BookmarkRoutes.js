@@ -1,12 +1,10 @@
 
-
 const express = require('express')
 const verifyToken = require('../../middleware/verifyToken')
 const addBookmark = require('../../controllers/BookmarkController/addBookmark')
 const deleteBookmark = require('../../controllers/BookmarkController/deleteBookmark')
 const getBookmark = require('../../controllers/BookmarkController/getBookmark')
 const bookmarkRouter = express.Router()
-
 
 
 bookmarkRouter.post('/addbookmarks', verifyToken, addBookmark)
