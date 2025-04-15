@@ -1,3 +1,5 @@
+const path = require('path');
+console.log('Trying to load:', path.resolve(__dirname, '../../controllers/BookmarkController/addBookmark'));
 
 const express = require('express')
 const verifyToken = require('../../middleware/verifyToken')

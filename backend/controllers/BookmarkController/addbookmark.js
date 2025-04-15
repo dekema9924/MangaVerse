@@ -11,7 +11,7 @@ const addBookmark = async (req, res) => {
     if (mangaExist) return res.status(409).json({ message: "book already bookmarked" })
     await bookmarkdb.create({
         title: title['en'] || title, coverUrl, mangaId, userId: req.user.id
-    }).then(async (result) => {
+    }).then((result) => {
         res.status(200).json({ message: 'Bookmarked✅' })
     })
 
