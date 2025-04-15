@@ -1,11 +1,11 @@
-const path = require('path');
-console.log('Trying to load:', path.resolve(__dirname, '../../controllers/BookmarkController/addBookmark'));
+
+console.log('Require paths:', require.resolve.paths('../../controllers/BookmarkController/addBookmark'));
 
 const express = require('express')
 const verifyToken = require('../../middleware/verifyToken')
-const addBookmark = require('../../controllers/BookmarkController/addBookmark')
 const deleteBookmark = require('../../controllers/BookmarkController/deleteBookmark')
 const getBookmark = require('../../controllers/BookmarkController/getBookmark')
+const addBookmark = require('../../controllers/BookmarkController/addBookmark')
 const bookmarkRouter = express.Router()
 
 
