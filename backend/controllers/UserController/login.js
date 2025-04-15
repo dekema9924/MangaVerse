@@ -24,8 +24,8 @@ const login = (req, res) => {
                     //pass token in cookie
                     res.cookie('token', token, {
                         httpOnly: true,
-                        sameSite: process.env.NODE_ENV === 'production' ? "None" : 'Lax',
-                        secure: process.env.NODE_ENV === 'production',
+                        sameSite: process.env.NODE_ENV == 'production' ? "None" : 'Lax',
+                        secure: process.env.NODE_ENV == 'production' ? true : false,
                         maxAge: 1 * 24 * 60 * 60 * 1000 // 1 days
                     }).status(200).json({ message: 'Login successful', user: { username: user.username, email: user.email, id: user._id } })
 
