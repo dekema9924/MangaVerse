@@ -9,14 +9,23 @@ import Chapters from './Chapters';
 import axios from 'axios';
 import { userUrl } from '../config/ApiUrl';
 import toast from 'react-hot-toast';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/Store';
 
 function Manga() {
     const { id } = useParams()
     const [readmore, setReadmore] = useState(false)
     const { mangaDetails, loading, coverUrl } = useGetDetails({ id: id || '' });
+    const [showLoginModal, setShowLoginModal] = useState(false);
+
+    const user = useSelector((state: RootState) => state.user.value)
 
     // bookmark manga
     const HandleAddBookmark = async () => {
+        if (!user.id) {
+            setShowLoginModal(true)
+            return;
+        }
         await axios.post(`${userUrl.baseUrl}/addbookmarks`, {
             title: mangaDetails?.attributes.altTitles.find(title => title['en']) || mangaDetails?.attributes.title,
             coverUrl: coverUrl,
@@ -33,6 +42,7 @@ function Manga() {
         }).catch((error) => {
             console.error(error)
         })
+
 
     }
 
@@ -87,6 +97,20 @@ function Manga() {
                                                     Reading
                                                 </p>
                                             </div>
+
+
+                                            {/* //showloginMessage Component */}
+                                            {showLoginModal && (
+                                                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                                                    <div className="bg-white p-4 rounded">
+                                                        <p className='text-black font-bold' >Please log in to add to your library.</p>
+                                                        <button onClick={() => setShowLoginModal(false)} className="mt-2 px-4 py-2 bg-orange-500 text-white rounded cursor-pointer">
+                                                            Close
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            )}
+
 
                                             {/* Tags and Additional Info */}
                                             <div className="mt-6 flex flex-col sm:flex-row md:items-center md:justify-start gap-4 w-full ">

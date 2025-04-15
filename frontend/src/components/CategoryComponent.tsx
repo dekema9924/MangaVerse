@@ -38,17 +38,28 @@ const responsive = {
 function CategoryComponent({ children, category, url }: CategoryComponentProps) {
     const [manga, setManga] = useState(initialState);
     const [isLoading, setIsLoading] = useState(true);
+    const [imgError, setImgError] = useState(false);
+    const [retryCount, setRetryCount] = useState(0);
+
+    const handleError = () => {
+        if (retryCount < 3) {
+            // Retry up to 3 times with cache busting
+            setRetryCount(retryCount + 1);
+        } else {
+            setImgError(true); // Show fallback image
+        }
+    };
 
     // Fetch manga data from backend
     useEffect(() => {
         axios.get(`${ApiUrl.baseUrl}/weekly?url=${url}`)
             .then((response) => {
-                setManga(response.data); 
-                setIsLoading(false); 
+                setManga(response.data);
+                setIsLoading(false);
             })
             .catch((error) => {
                 console.error("Error fetching manga:", error);
-                setIsLoading(false); 
+                setIsLoading(false);
             });
 
 
@@ -67,8 +78,19 @@ function CategoryComponent({ children, category, url }: CategoryComponentProps) 
                                     manga.map((data) => (
                                         <Link to={`/manga/${data.title}/${data.id}`} className="mt-10 mx-4" key={data.id}>
                                             <div>
-                                                <img referrerPolicy="no-referrer" className="md:w-22 w-80 md:h-44 m-auto object-center object-cover rounded-md" src={data.coverUrl} alt="mangaCover" />
-                                            </div>
+                                                {imgError ? (
+                                                    <div className="md:w-22 w-80 md:h-44 m-auto bg-gray-300 flex items-center justify-center rounded-md text-sm text-gray-500">
+                                                        Cover not available
+                                                    </div>
+                                                ) : (
+                                                    <img
+                                                        referrerPolicy="no-referrer"
+                                                        className="md:w-22 w-80 md:h-44 m-auto object-center object-cover rounded-md"
+                                                        src={`${data.coverUrl}?retry=${retryCount}`} // Cache busting on retry
+                                                        alt="mangaCover"
+                                                        onError={handleError}
+                                                    />
+                                                )}                                            </div>
                                             <p className="text-sm w-full text-center h-14 overflow-hidden font-bold pt-1">{data.title}</p>
                                         </Link>
                                     ))
