@@ -39,17 +39,22 @@ function Login() {
       .then(async (response) => {
         if (response.data.user.id) {
           toast.success(response.data.message)
+          setTimeout(async () => {
+            try {
+              const profileRes = await axios.get(`${userUrl.baseUrl}/profile`, {
+                withCredentials: true
+              });
 
-          const profileRes = await axios.get(`${userUrl.baseUrl}/profile`, {
-            withCredentials: true
-          });
-          dispatch(getUser({
-            username: profileRes.data.username,
-            id: profileRes.data._id,
-            email: profileRes.data.email
-          }));
+              dispatch(getUser({
+                username: profileRes.data.username,
+                id: profileRes.data._id,
+                email: profileRes.data.email
+              }));
+            } catch (error) {
+              console.error('Error fetching profile:', error);
+            }
+          }, 1000);
 
-          navigate('/')
         }
       })
       .catch((error) => {
