@@ -13,6 +13,12 @@ userRoutes.get('/register', (req, res) => {
     res.send('testing')
 })
 
+userRoutes.get('/debug-cookie', (req, res) => {
+    console.log('Cookies received on mobile:', req.cookies); // Should show token cookie
+    res.json({ cookies: req.cookies });
+});
+
+
 userRoutes.post("/", login)
 
 userRoutes.post("/register", register)
