@@ -57,7 +57,7 @@ function Login() {
   };
 
   axios.get('https://mangadex-jg2h.onrender.com/test-cookie', { withCredentials: true })
-    .then(res => console.log('Test cookie set!'))
+    .then(res => console.log('Test cookie set!', res))
     .catch(err => console.error('Cookie test failed', err));
 
   axios.get('https://mangadex-jg2h.onrender.com/check-cookie', { withCredentials: true })
