@@ -1,6 +1,5 @@
 const bookmarkdb = require('../../models/BookmarkModel')
 
-
 const getBookmark = async (req, res) => {
 
     await bookmarkdb.find({ userId: req.user.id }).sort({ createdAt: -1 })
