@@ -32,35 +32,28 @@ function Login() {
 
 
     //make axios request
-    axios.post(`${userUrl.baseUrl}`, {
-      email: input.email,
-      password: input.password
-    }, { withCredentials: true })
+    axios.post(`${userUrl.baseUrl}`, { email: input.email, password: input.password }, { withCredentials: true })
       .then(async (response) => {
         if (response.data.user.id) {
-          toast.success(response.data.message)
-          setTimeout(async () => {
-            try {
-              const profileRes = await axios.get(`${userUrl.baseUrl}/profile`, {
-                withCredentials: true
-              });
+          toast.success(response.data.message);
+          try {
+            const profileRes = await axios.get(`${userUrl.baseUrl}/profile`, { withCredentials: true });
 
-              dispatch(getUser({
-                username: profileRes.data.username,
-                id: profileRes.data._id,
-                email: profileRes.data.email
-              }));
-              navigate('/')
-            } catch (error) {
-              console.error('Error fetching profile:', error);
-            }
-          }, 1000);
-
+            dispatch(getUser({
+              username: profileRes.data.username,
+              id: profileRes.data._id,
+              email: profileRes.data.email
+            }));
+            navigate('/');
+          } catch (error) {
+            console.error('Error fetching profile:', error);
+          }
         }
       })
       .catch((error) => {
-        toast.error(error.response.data.message)
+        toast.error(error.response.data.message);
       });
+
   };
 
   return (
