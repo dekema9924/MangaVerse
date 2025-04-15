@@ -10,7 +10,7 @@ import { Toaster } from 'react-hot-toast';
 import Settings from "./pages/Settings";
 import Bookmarks from "./pages/Bookmarks";
 import Footer from "./components/Footer";
-
+import useGetUser from "./hooks/useGetUser";
 
 
 // Lazy-loaded components
@@ -21,6 +21,8 @@ const ChapterReader = lazy(() => import("./pages/ChapterReader"));
 
 
 function App() {
+  //call user
+  useGetUser()
   const { MenuClicked, setMenuClicked } = useMenu()
 
   return (

@@ -6,7 +6,6 @@ interface userInterface {
 
     username: string
     id: string
-    // token: string
     email: string
 
 }

@@ -2,7 +2,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SettingsIcon from "@mui/icons-material/Settings";
 import CloseIcon from "@mui/icons-material/Close";
 import LogoutIcon from '@mui/icons-material/Logout';
-// import LanguageIcon from "@mui/icons-material/Language";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import HomeFilledIcon from "@mui/icons-material/HomeFilled";
 import { Link } from "react-router-dom";
@@ -11,35 +10,44 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/Store";
-import cookies from 'js-cookie'
 import useGetUser from "../hooks/useGetUser";
 import { logout } from "../features/UserSlice";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import LoginIcon from '@mui/icons-material/Login';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
+import axios from "axios";
+import { userUrl } from "../config/ApiUrl";
 
 
 const Header = () => {
   const { MenuClicked, setMenuClicked } = useMenu();
   const location = useLocation()
   const user = useSelector((state: RootState) => state.user.value)
-  const userToken = cookies.get('token')
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-
+  console.log(user)
 
   //set user in redux
-  useGetUser()
+  if (!user) {
+    useGetUser();
+  }
 
   //logout function
-  const Logout = () => {
-    dispatch(logout())
-    toast.success('logging out...')
-    cookies.remove('token')
-    navigate('/')
-  }
+  const HandleLogout = () => {
+    axios.post(`${userUrl.baseUrl}/logout`, {}, { withCredentials: true })
+      .then((response) => {
+        console.log(response);
+        dispatch(logout());
+        navigate('/');
+        toast.success(response.data.message);
+      })
+      .catch((error) => {
+        console.error("Logout error:", error);
+        toast.error("Logout failed");  // Show error toast if something goes wrong
+      });
+  };
 
 
   //handle hamburger menu
@@ -53,7 +61,7 @@ const Header = () => {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [MenuClicked, userToken]);
+  }, [MenuClicked]);
 
 
 
@@ -77,7 +85,7 @@ const Header = () => {
             user.username.length > 0 ? (
               <div className="flex gap-4 items-center">
                 <p className="uppercase font-bold w-8 h-8 rounded-full bg-orange-500 flex justify-center items-center">{user.username.slice(0, 2)}</p>
-                <p onClick={() => Logout()}><LogoutIcon className="text-red-500 cursor-pointer" /></p>
+                <p onClick={HandleLogout}><LogoutIcon className="text-red-500 cursor-pointer" /></p>
 
               </div>
             ) : location.pathname === '/login' ? (
@@ -127,7 +135,6 @@ const Header = () => {
         </Link>
 
         {/* //general */}
-
         <p className="text-gray-400 mt-4">General</p>
         {
           user.id.length > 0 ?
@@ -156,24 +163,6 @@ const Header = () => {
             </>
 
         }
-
-        {/* //dev options */}
-        {/* <p className="text-gray-400 mt-4">Dev Options</p>
-        <div className="bg-gray-700 mt-1 p-2 w-11/12">
-          <p className="border-b-[1px] border-gray-500 my-1">Module Logs</p>
-          <p className="border-b-[1px] border-gray-500 my-1">Module Creator</p>
-          <p className="my-1">Documentation</p>
-        </div> */}
-
-        {/* website */}
-        {/* <p className="text-gray-400 mt-4">Website</p>
-        <div className="flex items-center w-11/12 my-1  bg-gray-700 gap-2">
-          <div className="bg-orange-500 rounded-md w-8 h-8 text-center">
-            <LanguageIcon className=" text-white " />
-          </div>
-          <p>Website</p>
-        </div> */}
-
       </aside>
     </>
   );

@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { userInterface } from "./Register";
 import toast from "react-hot-toast";
 import { userUrl } from "../config/ApiUrl";
+import { useDispatch } from "react-redux";
+import { getUser } from "../features/UserSlice";
 
 function Login() {
   const [hidden, setHidden] = useState("password");
@@ -16,6 +18,7 @@ function Login() {
   });
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const HandleInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setInput({
@@ -33,9 +36,19 @@ function Login() {
       email: input.email,
       password: input.password
     }, { withCredentials: true })
-      .then((response) => {
+      .then(async (response) => {
         if (response.data.user.id) {
           toast.success(response.data.message)
+
+          const profileRes = await axios.get(`${userUrl.baseUrl}/profile`, {
+            withCredentials: true
+          });
+          dispatch(getUser({
+            username: profileRes.data.username,
+            id: profileRes.data._id,
+            email: profileRes.data.email
+          }));
+
           navigate('/')
         }
       })
