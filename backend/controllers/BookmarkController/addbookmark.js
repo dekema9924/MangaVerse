@@ -1,6 +1,6 @@
 const bookmarkdb = require('../../models/BookmarkModel')
 
-const addbookmark = async (req, res) => {
+const addBookmark = async (req, res) => {
 
     const { title, coverUrl, mangaId } = req.body
 
@@ -16,4 +16,4 @@ const addbookmark = async (req, res) => {
 
 }
 
-module.exports = addbookmark
+module.exports = addBookmark

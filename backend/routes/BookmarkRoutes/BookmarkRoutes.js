@@ -2,15 +2,16 @@
 
 const express = require('express')
 const verifyToken = require('../../middleware/verifyToken')
+const addBookmark = require('../../controllers/BookmarkController/addBookmark')
+const deleteBookmark = require('../../controllers/BookmarkController/deleteBookmark')
+const getBookmark = require('../../controllers/BookmarkController/getBookmark')
 const bookmarkRouter = express.Router()
-const addbookmark = require('../../controllers/BookmarkController/addbookmark')
-const getbookmark = require('../../controllers/BookmarkController/getbookmark')
-const deletebookmark = require('../../controllers/BookmarkController/deletebookmark')
 
 
-bookmarkRouter.post('/addbookmarks', verifyToken, addbookmark)
-bookmarkRouter.get('/bookmarks', verifyToken, getbookmark)
-bookmarkRouter.delete('/bookmarks/:id', verifyToken, deletebookmark)
+
+bookmarkRouter.post('/addbookmarks', verifyToken, addBookmark)
+bookmarkRouter.get('/bookmarks', verifyToken, getBookmark)
+bookmarkRouter.delete('/bookmarks/:id', verifyToken, deleteBookmark)
 
 
 

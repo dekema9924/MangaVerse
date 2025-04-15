@@ -1,7 +1,7 @@
 
 const bookmarkdb = require('../../models/BookmarkModel')
 
-const deletebookmark = async (req, res) => {
+const deleteBookmark = async (req, res) => {
     const { id } = req.params
     await bookmarkdb.findByIdAndDelete(id).then((result) => {
         if (result) {
@@ -11,4 +11,4 @@ const deletebookmark = async (req, res) => {
     })
 }
 
-module.exports = deletebookmark
+module.exports = deleteBookmark
