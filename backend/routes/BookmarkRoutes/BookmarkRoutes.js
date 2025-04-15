@@ -17,10 +17,7 @@ console.log('Does addbookmark.js exist?', fs.existsSync(DeletebookmarkFile) ? 'â
 
 
 
-
-
-
-const files = fs.readdirSync(path.resolve(__dirname, '../../controllers/BookmarkController'));
+// const files = fs.readdirSync(path.resolve(__dirname, '../../controllers/BookmarkController'));
 console.log('Actual files:', files);
 
 delete require.cache[require.resolve('../../controllers/BookmarkController/addBookmark.js')];
