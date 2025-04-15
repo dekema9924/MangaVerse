@@ -6,13 +6,24 @@ const fullPath = path.resolve(__dirname, '../../controllers/BookmarkController/a
 console.log('Can require?', (() => { try { require(fullPath); return '✅ YES'; } catch { return '❌ NO'; } })());
 
 
-const targetFile = path.join(__dirname, '../../controllers/BookmarkController/addBookmark.js');
-console.log('Does addbookmark.js exist?', fs.existsSync(targetFile) ? '✅ YES' : '❌ NO');
+const addbookmarkFile = path.join(__dirname, '../../controllers/BookmarkController/addBookmark.js');
+console.log('Does addbookmark.js exist?', fs.existsSync(addbookmarkFile) ? '✅ YES' : '❌ NO');
+
+const getBookmarkFile = path.join(__dirname, '../../controllers/BookmarkController/getBookmark.js');
+console.log('Does addbookmark.js exist?', fs.existsSync(getBookmarkFile) ? '✅ YES' : '❌ NO');
+
+const DeletebookmarkFile = path.join(__dirname, '../../controllers/BookmarkController/deleteBookmark.js');
+console.log('Does addbookmark.js exist?', fs.existsSync(DeletebookmarkFile) ? '✅ YES' : '❌ NO');
+
+
+
+
+
 
 const files = fs.readdirSync(path.resolve(__dirname, '../../controllers/BookmarkController'));
 console.log('Actual files:', files);
 
-delete require.cache[require.resolve('../../controllers/BookmarkController/addbookmark.js')];
+delete require.cache[require.resolve('../../controllers/BookmarkController/addBookmark.js')];
 
 const express = require('express')
 const verifyToken = require('../../middleware/verifyToken')
