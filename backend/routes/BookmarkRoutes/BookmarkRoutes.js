@@ -3,7 +3,7 @@ console.log('Require paths:', require.resolve.paths('../../controllers/BookmarkC
 
 const express = require('express')
 const verifyToken = require('../../middleware/verifyToken')
-const deleteBookmark = require('../../controllers/BookmarkController/deleteBookmark')
+const DeleteBookmark = require('../../controllers/BookmarkController/DeleteBookmark')
 const getBookmark = require('../../controllers/BookmarkController/getBookmark')
 const addBookmark = require('../../controllers/BookmarkController/addBookmark')
 const bookmarkRouter = express.Router()
@@ -11,7 +11,7 @@ const bookmarkRouter = express.Router()
 
 bookmarkRouter.post('/addbookmarks', verifyToken, addBookmark)
 bookmarkRouter.get('/bookmarks', verifyToken, getBookmark)
-bookmarkRouter.delete('/bookmarks/:id', verifyToken, deleteBookmark)
+bookmarkRouter.delete('/bookmarks/:id', verifyToken, DeleteBookmark)
 
 
 
