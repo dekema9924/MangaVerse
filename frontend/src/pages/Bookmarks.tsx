@@ -1,6 +1,5 @@
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import axios from 'axios';
-import useUserCookie from '../hooks/useUserCookie';
 import { userUrl } from '../config/ApiUrl';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +12,6 @@ interface BookmarkInterface {
 }
 
 function Bookmarks() {
-    const token = useUserCookie()
     const navigate = useNavigate()
     const [loading, setLoading] = useState(true)
     const [bookmarks, setBookmarks] = useState<BookmarkInterface[]>([])
@@ -27,7 +25,6 @@ function Bookmarks() {
     //delete bookmark
     const HandleDelete = (id: string) => {
         axios.delete(`${userUrl.baseUrl}/bookmarks/${id}`, {
-            headers: { Authorization: `Bearer ${token}` },
             withCredentials: true
         }).then((response) => {
             console.log(response)
@@ -38,10 +35,8 @@ function Bookmarks() {
 
     useEffect(() => {
         axios.get(`${userUrl.baseUrl}/bookmarks`, {
-            headers: { Authorization: `Bearer ${token}` },
             withCredentials: true
         }).then((response) => {
-            console.log(response.data.bookmarks)
             setBookmarks(response.data.bookmarks)
             setLoading(false)
         })

@@ -23,7 +23,7 @@ const login = (req, res) => {
                     const token = createToken(user._id)
                     //pass token in cookie
                     res.cookie('token', token, {
-                        // httpOnly: true,
+                        httpOnly: true,
                         sameSite: 'none',
                         secure: process.env.NODE_ENV === 'production',
                         maxAge: 1 * 24 * 60 * 60 * 1000 // 1 days

@@ -8,14 +8,12 @@ import useGetDetails from '../hooks/useGetDetails';
 import Chapters from './Chapters';
 import axios from 'axios';
 import { userUrl } from '../config/ApiUrl';
-import useUserCookie from '../hooks/useUserCookie';
 import toast from 'react-hot-toast';
 
 function Manga() {
     const { id } = useParams()
     const [readmore, setReadmore] = useState(false)
     const { mangaDetails, loading, coverUrl } = useGetDetails({ id: id || '' });
-    const token = useUserCookie()
 
     // bookmark manga
     const HandleAddBookmark = async () => {
@@ -25,9 +23,6 @@ function Manga() {
             mangaId: id
 
         }, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            },
             withCredentials: true
         }).then((response) => {
             if (response.data.message == 'Bookmarked✅') {

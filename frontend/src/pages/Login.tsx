@@ -29,7 +29,6 @@ function Login() {
 
 
     //make axios request
-    axios.defaults.withCredentials = true
     axios.post(`${userUrl.baseUrl}`, {
       email: input.email,
       password: input.password
