@@ -9,9 +9,22 @@ const userRoutes = express.Router();
 
 //routes 
 
-userRoutes.get('/register', (req, res) => {
-    res.send('testing')
-})
+// TEST route to set cookie
+userRoutes.get('/test-cookie', (req, res) => {
+    res.cookie('test', 'cookie-works', {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'None',
+        maxAge: 60000 // 1 minute
+    });
+    res.send('Test cookie sent!');
+});
+
+// TEST route to check if cookie was received
+userRoutes.get('/check-cookie', (req, res) => {
+    console.log('Cookies received:', req.cookies);
+    res.json({ cookies: req.cookies });
+});
 
 userRoutes.get('/debug-cookie', (req, res) => {
     console.log('Cookies received on mobile:', req.cookies); // Should show token cookie
