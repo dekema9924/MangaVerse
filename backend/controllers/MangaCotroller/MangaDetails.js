@@ -18,7 +18,8 @@ const mangaDetails = async (req, res) => {
             // Fetch the cover image URL
             const coverRes = await axios.get(`https://api.mangadex.org/cover/${coverArt.id}`);
             const fileName = coverRes.data.data.attributes.fileName;
-            coverUrl = `https://mangadex.org/covers/${id}/${fileName}`;
+            coverUrl = `https://uploads.mangadex.org/covers/${id}/${fileName}.256.jpg`; // 256px size
+
         }
 
         res.json({
