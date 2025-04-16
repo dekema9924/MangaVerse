@@ -30,17 +30,6 @@ function Login() {
   const HandleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    useEffect(() => {
-      axios.get('https://mangadex-jg2h.onrender.com/check-cookie', {
-        withCredentials: true
-      }).then(res => {
-        alert('Cookies: ' + JSON.stringify(res.data));
-      }).catch(err => {
-        alert('Error: ' + err.message);
-      });
-    }, []);
-
-
 
     //make axios request
     axios.post(`${userUrl.baseUrl}`, { email: input.email, password: input.password }, { withCredentials: true })
