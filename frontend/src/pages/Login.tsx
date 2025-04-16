@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Link } from "react-router-dom";
@@ -30,6 +30,17 @@ function Login() {
   const HandleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
+    useEffect(() => {
+      axios.get('https://mangadex-jg2h.onrender.com/check-cookie', {
+        withCredentials: true
+      }).then(res => {
+        alert('Cookies: ' + JSON.stringify(res.data));
+      }).catch(err => {
+        alert('Error: ' + err.message);
+      });
+    }, []);
+
+
 
     //make axios request
     axios.post(`${userUrl.baseUrl}`, { email: input.email, password: input.password }, { withCredentials: true })
@@ -55,15 +66,6 @@ function Login() {
       });
 
   };
-
-  axios.get('https://mangadex-jg2h.onrender.com/test-cookie', { withCredentials: true })
-    .then(res => console.log('Test cookie set!', res))
-    .catch(err => console.error('Cookie test failed', err));
-
-  axios.get('https://mangadex-jg2h.onrender.com/check-cookie', { withCredentials: true })
-    .then(res => console.log('Cookies received:', res.data))
-    .catch(err => console.error('Check cookie failed', err));
-
 
   return (
     <>
