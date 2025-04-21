@@ -1,109 +1,71 @@
-MangaVerse - Manga Reading Platform
-MangaVerse Logo
-A universe of manga at your fingertips
+# MangaVerse
 
-🌟 Features
-📚 Extensive manga library powered by MangaDex API
+![MangaVerse Banner](./assets/banner.png) <!-- Replace with actual banner image -->
 
-🔐� Mobile-responsive design (works on any device)
+A modern manga reading platform powered by MangaDex API with user accounts and responsive design.
 
-🔒 User authentication with JWT tokens
+## ✨ Features
 
-❤️ Favorite manga tracking
+<div align="center">
+  <img src="./assets/feature-showcase.gif" alt="Feature showcase" width="800"> <!-- Replace with actual GIF -->
+</div>
 
-🔔 Reading progress tracking
+- **📖 Manga Reader**  
+  - Powered by MangaDex API
+  - Clean reading interface
+  - Chapter navigation
+- **🔐 User Accounts**  
+  - JWT authentication
+  - Favorite tracking
+  - Reading progress
+- **📱 Responsive Design**  
+  - Mobile-first approach
+  - Tablet/desktop optimized
+- **⚡ Performance**  
+  - React virtual lists
+  - Image lazy loading
 
-🎨 Sleek UI with Tailwind CSS
+## 🛠 Tech Stack
 
-⚡ Fast performance with React and Node.js
+<div align="center">
 
-🛠️ Tech Stack
-Tech Stack
+| Frontend          | Backend         | Database       | DevOps         |
+|-------------------|-----------------|----------------|----------------|
+| ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) | ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) | ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white) | ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white) |
+| ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white) | ![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white) | ![Mongoose](https://img.shields.io/badge/Mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white) | ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white) |
+| ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) | ![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white) |  |  |
 
-Frontend: React with TypeScript (TSX)
+</div>
 
-Styling: Tailwind CSS
+## 📸 Screenshots
 
-Backend: Node.js with Express
+<div align="center">
 
-Database: MongoDB
+| Light Mode | Dark Mode | Mobile View |
+|------------|-----------|-------------|
+| ![Light Mode](./screenshots/light.png) | ![Dark Mode](./screenshots/dark.png) | ![Mobile](./screenshots/mobile.png) |
 
-Authentication: JWT Tokens
+</div>
 
-API: MangaDex API integration
+## 🚀 Getting Started
 
-📱 Screenshots
-Home Page	Manga Reader	User Profile
-Home	Reader	Profile
-🚀 Getting Started
-Prerequisites
-Node.js (v14+)
+### Prerequisites
+- Node.js 16+
+- MongoDB 4.4+
+- Yarn/npm
 
-MongoDB Atlas account or local MongoDB
-
-MangaDex API access
-
-Installation
-Clone the repository
-
-bash
+### Installation
+```bash
+# Clone repository
 git clone https://github.com/yourusername/mangaverse.git
 cd mangaverse
-Install dependencies
 
-bash
+# Install dependencies
 npm install
-cd client && npm install
-Set up environment variables
-Create a .env file in the root directory:
 
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret_key
-MANGADEX_API=https://api.mangadex.org
-Run the application
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your credentials
 
-bash
-npm run dev
-🌐 API Endpoints
-Endpoint	Method	Description
-/api/auth/register	POST	User registration
-/api/auth/login	POST	User login
-/api/manga	GET	Fetch manga list
-/api/manga/:id	GET	Get manga details
-/api/user/favorites	GET	Get user favorites
-📱 Mobile Responsiveness
-Mobile Demo
-Fully responsive design for all screen sizes
-
-🔒 Security Features
-JWT token authentication
-
-Password hashing
-
-Protected routes
-
-Rate limiting
-
-📂 Project Structure
-mangaverse/
-├── client/            # React frontend
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── hooks/
-│   │   └── ...
-├── server/            # Node.js backend
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   └── ...
-├── .env.example       # Environment variables template
-└── package.json
-🤝 Contributing
-Contributions are welcome! Please fork the repository and create a pull request.
-
-📄 License
-This project is licensed under the MIT License.
-
-📖 Happy Reading! - The MangaVerse Team 🚀
+# Start development server
+nodemon / node server.js
