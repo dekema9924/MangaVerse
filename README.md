@@ -1,157 +1,109 @@
-MangaVerse 📖
+MangaVerse - Manga Reading Platform
+MangaVerse Logo
+A universe of manga at your fingertips
 
-A modern Manga Reading web application powered by the MangaDex API.
-Built with React, TypeScript, Node.js, MongoDB, and Tailwind CSS — fully mobile responsive 📱.
+🌟 Features
+📚 Extensive manga library powered by MangaDex API
 
-Users can browse, read manga, and create an account securely using JWT authentication.
+🔐� Mobile-responsive design (works on any device)
 
+🔒 User authentication with JWT tokens
 
+❤️ Favorite manga tracking
 
-✨ Features
+🔔 Reading progress tracking
 
-🔎 Explore Manga — Browse thousands of manga directly from the MangaDex API
+🎨 Sleek UI with Tailwind CSS
 
-📖 Read Manga — Smooth, mobile-friendly manga reader
-
-🔒 User Authentication — Create accounts and login securely with JWT tokens
-
-🧑‍💻 Save Progress — Track your reading and favorites
-
-📱 Fully Responsive — Optimized for desktop, tablet, and mobile
-
-🚀 Fast and Lightweight — Built with React, TSX, Tailwind, and Node.js backend
-
-🖼️ Beautiful UI — Clean design with dynamic loading, custom icons, and seamless transitions
+⚡ Fast performance with React and Node.js
 
 🛠️ Tech Stack
+Tech Stack
 
-Frontend
+Frontend: React with TypeScript (TSX)
 
-Backend
+Styling: Tailwind CSS
 
-Database
+Backend: Node.js with Express
 
-Authentication
+Database: MongoDB
 
-Styling
+Authentication: JWT Tokens
 
-Hosting
+API: MangaDex API integration
 
-React (TSX)
+📱 Screenshots
+Home Page	Manga Reader	User Profile
+Home	Reader	Profile
+🚀 Getting Started
+Prerequisites
+Node.js (v14+)
 
-Node.js (Express)
+MongoDB Atlas account or local MongoDB
 
-MongoDB Atlas
+MangaDex API access
 
-JWT (JSON Web Token)
+Installation
+Clone the repository
 
-Tailwind CSS
-
-(Coming soon...)
-
-📸 Screenshots
-
-Home Page
-
-Manga Reader
-
-Account System
-
-
-
-
-
-
-
-(Replace with your real screenshots once available.)
-
-✨ Installation & Setup
-
-1. Clone the repository
-
+bash
 git clone https://github.com/yourusername/mangaverse.git
 cd mangaverse
+Install dependencies
 
-2. Frontend Setup
-
-cd client
+bash
 npm install
+cd client && npm install
+Set up environment variables
+Create a .env file in the root directory:
+
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+MANGADEX_API=https://api.mangadex.org
+Run the application
+
+bash
 npm run dev
+🌐 API Endpoints
+Endpoint	Method	Description
+/api/auth/register	POST	User registration
+/api/auth/login	POST	User login
+/api/manga	GET	Fetch manga list
+/api/manga/:id	GET	Get manga details
+/api/user/favorites	GET	Get user favorites
+📱 Mobile Responsiveness
+Mobile Demo
+Fully responsive design for all screen sizes
 
-3. Backend Setup
+🔒 Security Features
+JWT token authentication
 
-cd server
-npm install
-npm run dev
+Password hashing
 
-4. Environment Variables
+Protected routes
 
-Create a .env file in /server:
+Rate limiting
 
-MONGO_URI=your_mongodb_connection
-JWT_SECRET=your_jwt_secret
-MANGADEX_API_URL=https://api.mangadex.org
-
-📚 API Reference
-
-MangaDex API — https://api.mangadex.org/docs
-
-We fetch:
-
-Manga titles
-
-Chapter lists
-
-Manga cover art
-
-Pages for reading
-
-📱 Mobile View
-
-MangaVerse is fully responsive for mobile users!
-
-Manga pages auto-fit to screen
-
-Touch/swipe navigation enabled
-
-Fast loading and lazy image fetching
-
-🔒 Authentication
-
-Passwords are hashed and securely stored in MongoDB
-
-Users get JWT tokens for secure login sessions
-
-Protected routes for personal data (reading progress, favorites)
-
-🎨 Icons & Assets
-
-Heroicons
-
-Phosphor Icons
-
-Custom MangaVerse logo (coming soon)
-
-🛡️ Future Features
-
-📥 Download manga chapters offline
-
-💬 Comment sections
-
-🌗 Dark mode
-
-🏆 Leaderboards for most popular manga
-
-🔔 Notification system
-
-👨‍💻 Author
-
-Built by [Your Name Here]
-
-Feel free to contribute! PRs welcome ✨
+📂 Project Structure
+mangaverse/
+├── client/            # React frontend
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── hooks/
+│   │   └── ...
+├── server/            # Node.js backend
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   └── ...
+├── .env.example       # Environment variables template
+└── package.json
+🤝 Contributing
+Contributions are welcome! Please fork the repository and create a pull request.
 
 📄 License
-
 This project is licensed under the MIT License.
 
-🌟 MangaVerse — Your ultimate manga reading experience.
+📖 Happy Reading! - The MangaVerse Team 🚀
