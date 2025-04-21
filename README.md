@@ -69,3 +69,22 @@ cp .env.example .env
 
 # Start development server
 nodemon / node server.js
+
+mangaverse/
+├── client/            # React frontend
+│   ├── public/        # Static assets
+│   └── src/           # Source code
+│       ├── assets/    # Images, icons
+│       ├── components # Reusable components
+│       ├── hooks/     # Custom hooks
+│       ├── pages/     # Route pages
+│       ├── store/     # State management
+│       └── utils/     # Utility functions
+├── server/            # Node.js backend
+│   ├── config/       # Configuration
+│   ├── controllers/  # Route controllers
+│   ├── middleware/   # Express middleware
+│   ├── models/       # MongoDB models
+│   ├── routes/       # API routes
+│   └── utils/        # Helper functions
+└── docs/             # Documentation
