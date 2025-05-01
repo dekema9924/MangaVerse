@@ -18,7 +18,7 @@ const bookmarkRouter = require('./routes/BookmarkRoutes/BookmarkRoutes');
 app.use(cors({
     origin: process.env.NODE_ENV === 'development'
         ? 'http://localhost:5173' // local frontend during development
-        : 'https://m0ngaverse.netlify.app', // deployed frontend in production
+        : 'https://manga.devwithdaniel.com', // deployed frontend in production
     credentials: true //for  cookies and header
 }));
 app.use(cookieParser())
